@@ -1,6 +1,6 @@
 package main
 
-import "github.com/Kroustille/adventofcode/2020/template/challenge"
+import "github.com/Kroustille/adventofcode/template/challenge"
 
 func main() {
 	c := challenge.Challenge{}

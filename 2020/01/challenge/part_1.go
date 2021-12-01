@@ -3,7 +3,7 @@ package challenge
 import (
 	"time"
 
-	"github.com/Kroustille/adventofcode/2020/utils"
+	"github.com/Kroustille/adventofcode/utils"
 )
 
 const TOTAL_RESULT = 2020
