@@ -8,7 +8,8 @@ import (
 
 func (c Challenge) ResolvePart2() {
 	start := time.Now()
+	_ = utils.ReadLines("input")
 
 	result := 1
-	utils.PrintResult(1, result, start)
+	utils.PrintResult(2, result, start)
 }

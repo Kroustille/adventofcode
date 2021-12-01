@@ -27,6 +27,15 @@ func ReadLines(path string) []string {
 	return lines
 }
 
+func ConvertLinesToIntArray(lines []string) []int {
+	numbers := make([]int, len(lines))
+	for i, line := range lines {
+		numbers[i] = FatalReadInt(line)
+	}
+
+	return numbers
+}
+
 func FatalReadInt(str string) int {
 	number, err := strconv.Atoi(str)
 	if err != nil {
