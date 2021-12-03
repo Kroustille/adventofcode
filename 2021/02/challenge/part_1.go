@@ -7,12 +7,6 @@ import (
 	"github.com/Kroustille/adventofcode/utils"
 )
 
-const (
-	FORWARD = "forward"
-	UP      = "up"
-	DOWN    = "down"
-)
-
 func (c Challenge) ResolvePart1() {
 	start := time.Now()
 	lines := utils.ReadLines("input")

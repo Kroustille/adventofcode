@@ -44,3 +44,12 @@ func FatalReadInt(str string) int {
 
 	return number
 }
+
+func FatalReadBinary(str string) int {
+	number, err := strconv.ParseInt(str, 2, 16)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return int(number)
+}
