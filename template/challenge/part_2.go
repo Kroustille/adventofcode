@@ -2,14 +2,11 @@ package challenge
 
 import (
 	"time"
-
-	"github.com/Kroustille/adventofcode/utils"
 )
 
-func (c Challenge) ResolvePart2() {
+func (c Challenge) ResolvePart2(lines []string) (int, time.Duration) {
 	start := time.Now()
-	_ = utils.ReadLines("input")
 
-	result := 1
-	utils.PrintResult(2, result, start)
+	result := 2
+	return result, time.Since(start)
 }
