@@ -2,7 +2,7 @@ package challenge
 
 import (
 	"fmt"
-	"log"
+	"math"
 	"time"
 )
 
@@ -39,27 +39,16 @@ func (c Challenge) ResolvePart2(lines []string) (int, time.Duration) {
 				}
 			}
 		} else {
-			loop_start_x := wind_vector.start.x
-			loop_end_x := wind_vector.end.x
-			loop_direction_x := 1
-			if wind_vector.end.x < wind_vector.start.x {
-				loop_direction_x = -1
-			} else if wind_vector.end.x == wind_vector.start.x {
-				loop_direction_x = 0
-			}
+			current_loop_x := wind_vector.start.x
+			loop_direction_x := (wind_vector.end.x - wind_vector.start.x) / int(math.Abs(float64(wind_vector.end.x-wind_vector.start.x)))
+			loop_end_x := wind_vector.end.x + loop_direction_x
 
-			loop_start_y := wind_vector.start.y
-			loop_end_y := wind_vector.end.y
-			loop_direction_y := 1
-			if wind_vector.end.y < wind_vector.start.y {
-				loop_direction_y = -1
-			} else if wind_vector.end.y == wind_vector.start.y {
-				loop_direction_y = 0
-			}
-			log.Println(loop_start_x, loop_end_x, loop_direction_x, "####", loop_start_y, loop_end_y, loop_direction_y)
+			current_loop_y := wind_vector.start.y
+			loop_direction_y := (wind_vector.end.y - wind_vector.start.y) / int(math.Abs(float64(wind_vector.end.y-wind_vector.start.y)))
+			loop_end_y := wind_vector.end.y + loop_direction_y
 
-			for loop_start_x != loop_end_x+loop_direction_x && loop_start_y != loop_end_y+loop_direction_y {
-				key := fmt.Sprintf("%d,%d", loop_start_x, loop_start_y)
+			for current_loop_x != loop_end_x && current_loop_y != loop_end_y {
+				key := fmt.Sprintf("%d,%d", current_loop_x, current_loop_y)
 				_, ok := wind_values[key]
 				if !ok {
 					wind_values[key] = 1
@@ -67,9 +56,8 @@ func (c Challenge) ResolvePart2(lines []string) (int, time.Duration) {
 					wind_values[key] += 1
 				}
 
-				loop_start_x += loop_direction_x
-				loop_start_y += loop_direction_y
-				log.Println(loop_start_x, loop_end_x, key)
+				current_loop_x += loop_direction_x
+				current_loop_y += loop_direction_y
 			}
 		}
 	}
