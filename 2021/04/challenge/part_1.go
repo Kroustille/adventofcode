@@ -22,7 +22,7 @@ func (c Challenge) ResolvePart1(lines []string) (int, time.Duration) {
 			if is_winning {
 				winning_board_index = board_index
 				winning_number = winning_numbers[winning_number_index]
-				log.Println("We have a winner with number ! Board :")
+				log.Println("We have a winner ! Board :")
 				log.Println(boards[winning_board_index])
 				break
 			}
