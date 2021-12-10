@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/Kroustille/adventofcode/template/challenge"
+	"github.com/Kroustille/adventofcode/2021/10/challenge"
 	"github.com/Kroustille/adventofcode/utils"
 )
 
@@ -13,6 +13,6 @@ func main() {
 	result_1, time_1 := c.ResolvePart1(lines)
 	utils.PrintResultDuration(1, result_1, time_1)
 
-	// result_2, time_2 := c.ResolvePart2(lines)
-	// utils.PrintResultDuration(2, result_2, time_2)
+	result_2, time_2 := c.ResolvePart2(lines)
+	utils.PrintResultDuration(2, result_2, time_2)
 }
