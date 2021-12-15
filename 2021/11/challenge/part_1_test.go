@@ -33,7 +33,7 @@ func TestRunStepOneTime(t *testing.T) {
 	c := Challenge{}
 
 	octopuses := c.BuildOctopusesArray(lines)
-	_ = c.RunStep(octopuses)
+	_ = c.RunStep1(octopuses)
 
 	checkOctopusesArray(t, octopuses, "../one_step_energy")
 	// assert.Equal(t, 0, flash_count)
@@ -44,9 +44,9 @@ func TestRunStepTwoTimes(t *testing.T) {
 	c := Challenge{}
 
 	octopuses := c.BuildOctopusesArray(lines)
-	_ = c.RunStep(octopuses)
+	_ = c.RunStep1(octopuses)
 	log.Println(octopuses)
-	_ = c.RunStep(octopuses)
+	_ = c.RunStep1(octopuses)
 
 	checkOctopusesArray(t, octopuses, "../two_step_energy")
 	// assert.Equal(t, 35, flash_count)
