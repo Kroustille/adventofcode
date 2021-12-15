@@ -10,9 +10,9 @@ type Challenge struct {
 }
 
 type Cave struct {
-	code           string
-	already_viewed bool
-	linked_caves   []*Cave
+	code         string
+	times_viewed int
+	linked_caves []*Cave
 }
 
 func (c Cave) String() string {
