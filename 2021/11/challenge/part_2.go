@@ -5,7 +5,7 @@ import (
 	"time"
 )
 
-const STEP_COUNT_2 = 200
+const STEP_COUNT_2 = 500
 
 func (c Challenge) RunStep2(octopuses []*Octopus) bool {
 	for _, octopus := range octopuses {
@@ -38,17 +38,18 @@ func (c Challenge) ResolvePart2(lines []string) (int, time.Duration) {
 	octopuses := c.BuildOctopusesArray(lines)
 	log.Println("INITIAL DATA")
 	c.DisplayOctopusesGrid(octopuses)
-	total_flash_count := 0
+	winning_step := 0
 	for i := 0; i < STEP_COUNT_2; i++ {
 		all_flashed := c.RunStep2(octopuses)
 		if all_flashed {
-			log.Println("all_flashed", all_flashed, i)
+			winning_step = i + 1
+			log.Println("all_flashed", all_flashed, winning_step)
 			break
 		}
 		log.Println("STEP ", i+1)
 		c.DisplayOctopusesGrid(octopuses)
 	}
 
-	result := total_flash_count
+	result := winning_step
 	return result, time.Since(start)
 }
