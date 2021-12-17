@@ -7,10 +7,6 @@ import (
 	"github.com/Kroustille/adventofcode/utils"
 )
 
-func (c Challenge) IsIndexValid(index, max_value int) bool {
-	return index >= 0 && index < max_value
-}
-
 func (c Challenge) ResolvePart1(lines []string) (int, time.Duration) {
 	start := time.Now()
 
