@@ -10,9 +10,9 @@ func main() {
 
 	lines := utils.ReadLines("input")
 
-	result_1, time_1 := c.ResolvePart1(lines)
-	utils.PrintResultDuration(1, result_1, time_1)
+	// result_1, time_1 := c.ResolvePart1(lines)
+	// utils.PrintResultDuration(1, result_1, time_1)
 
-	// result_2, time_2 := c.ResolvePart2(lines)
-	// utils.PrintResultDuration(2, result_2, time_2)
+	result_2, time_2 := c.ResolvePart2(lines)
+	utils.PrintResultDuration(2, result_2, time_2)
 }
