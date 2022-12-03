@@ -1,8 +1,7 @@
 import { read } from '../shared/read'
 
 const input_path = `${__dirname}/input`
-const data = read(input_path)
-const lines = data.split('\n')
+const lines = read(input_path)
 
 const calories: number[] = []
 let acc = 0
