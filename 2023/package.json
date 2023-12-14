@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node ./src/13/challenge.ts"
+    "start": "ts-node ./src/14/challenge.ts"
   },
   "keywords": [],
   "author": "",
