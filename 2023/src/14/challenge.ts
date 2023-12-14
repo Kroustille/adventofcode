@@ -47,22 +47,10 @@ const getFinalValue = (final_rocks: Rock[]) => {
   }, 0)
 }
 
-const cache: Map<string, number[]> = new Map()
-
 const spinNorth = () => {
   for(let column = 0 ; column < lines[0].length ; column++) {
     const column_rocks = rocks.filter(rock => rock.x === column).sort((a, b) => a.y - b.y)
-    // const coords = column_rocks.map(rock => rock.y).join(';')
-    // const key = `north-${coords}`
-    // if (cache.has(key)) {
-    //   const new_columns = cache.get(key)
-    //   new_columns!.forEach((y, index) => {
-    //     column_rocks[index].y = y
-    //   })
 
-    //   continue
-    // }
-    
     for(let i = 0 ; i < column_rocks.length ; i++) {
       const rock = column_rocks[i]
       if (rock.type === 'cube') {
@@ -76,25 +64,12 @@ const spinNorth = () => {
         rock.y = 0
       }
     }
-
-    // cache.set(key, column_rocks.map(rock => rock.y))
   }
 }
 
 const spinSouth = () => {
   for(let column = 0 ; column < lines[0].length ; column++) {
     const column_rocks = rocks.filter(rock => rock.x === column).sort((a, b) => a.y - b.y)
-    // const coords = column_rocks.map(rock => rock.y).join(';')
-    // const key = `south-${coords}`
-    // if (cache.has(key)) {
-    //   const new_columns = cache.get(key)
-    //   new_columns!.forEach((y, index) => {
-    //     column_rocks[index].y = y
-    //   })
-
-    //   continue
-    // }
-
     for(let i = column_rocks.length - 1 ; i >= 0 ; i--) {
       const rock = column_rocks[i]
       if (rock.type === 'cube') {
@@ -108,25 +83,12 @@ const spinSouth = () => {
         rock.y = lines.length - 1
       }
     }
-
-    // cache.set(key, column_rocks.map(rock => rock.y))
   }
 }
 
 const spinWest = () => {
   for (let row = 0 ; row < lines.length ; row ++) {
     const row_rocks = rocks.filter(rock => rock.y === row).sort((a, b) => a.x - b.x)
-    // const coords = row_rocks.map(rock => rock.x).join(';')
-    // const key = `west-${coords}`
-    // if (cache.has(key)) {
-    //   const new_columns = cache.get(key)
-    //   new_columns!.forEach((x, index) => {
-    //     row_rocks[index].x = x
-    //   })
-
-    //   continue
-    // }
-
     for (let i = 0 ; i < row_rocks.length ; i++) {
       const rock = row_rocks[i]
       if (rock.type === 'cube') {
@@ -140,27 +102,12 @@ const spinWest = () => {
         rock.x = 0
       }
     }
-
-    // cache.set(key, row_rocks.map(rock => rock.x))
   }
 }
 
-let retrieve_cache = 0
 const spinEast = () => {
   for (let row = 0 ; row < lines.length ; row ++) {
     const row_rocks = rocks.filter(rock => rock.y === row).sort((a, b) => a.x - b.x)
-    // const coords = row_rocks.map(rock => rock.x).join(';')
-    // const key = `east-${coords}`
-    // if (cache.has(key)) {
-    //   retrieve_cache++
-    //   const new_columns = cache.get(key)
-    //   new_columns!.forEach((x, index) => {
-    //     row_rocks[index].x = x
-    //   })
-
-    //   continue
-    // }
-
     for (let i = row_rocks.length - 1 ; i >= 0 ; i--) {
       const rock = row_rocks[i]
       if (rock.type === 'cube') {
@@ -174,8 +121,6 @@ const spinEast = () => {
         rock.x = lines[0].length - 1
       }
     }
-
-    // cache.set(key, row_rocks.map(rock => rock.x))
   }
 }
 
@@ -242,13 +187,4 @@ const getIndex = (value: number): number =>  {
 const final_index = getIndex(1000000000)
 const final_cycle = cycles[final_index]
 
-// final should be equal to 5
-console.log('first', first_index, 'last', last_index, 'final',  final_index)
-
-console.log()
-for(let i = first_index ; i <= last_index; i++) {
-  console.log(i, getFinalValue(cycles[i]))
-}
-
-console.log()
 console.log(getFinalValue(final_cycle))
