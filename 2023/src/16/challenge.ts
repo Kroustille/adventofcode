@@ -108,9 +108,7 @@ const getTransformation = (cell: Cell): Transformation => {
   }
 }
 
-const energized_cells: Set<string> = new Set()
-
-const printCells = () => {
+const printCells = (energized_cells: Set<string>) => {
   for(let y = 0 ; y < height ; y++) {
     let line = ''
     for(let x = 0 ; x < width ; x++) {
@@ -127,42 +125,65 @@ const printCells = () => {
   console.log()
 }
 
-const sentBeams: Set<string> = new Set()
+const countEnergizedCells = (start_x: number, start_y: number, start_direction: Direction): number => {
+  const energized_cells: Set<string> = new Set()
+  const sentBeams: Set<string> = new Set()
 
-const sendBeam = (x: number, y: number, direction: Direction): void => {
-  if (x < 0 || x >= width) {
-    return
+  const sendBeam = (x: number, y: number, direction: Direction): void => {
+    if (x < 0 || x >= width) {
+      return
+    }
+    if (y < 0 || y >= height) {
+      return
+    }
+  
+    const cell_key = getCellKey(x, y)
+    if (sentBeams.has(`${cell_key};${direction}`)) {
+      return
+    }
+  
+    sentBeams.add(`${cell_key};${direction}`)
+  
+    energized_cells.add(cell_key)
+    if (!contraption.has(cell_key)) {
+      const next_x = getNextX(x, direction)
+      const next_y = getNextY(y, direction)
+  
+      return sendBeam(next_x, next_y, direction)
+    }
+  
+    const cell = contraption.get(cell_key)
+    assert(cell)
+  
+    const transformation = getTransformation(cell)
+    const next_directions = transformation[direction]
+    next_directions.forEach(next_direction => {
+      const { next_x, next_y } = getNextCoords(x, y, next_direction)
+      sendBeam(next_x, next_y, next_direction)
+    })
   }
-  if (y < 0 || y >= height) {
-    return
-  }
+  
+  sendBeam(start_x, start_y, start_direction)
 
-  const cell_key = getCellKey(x, y)
-  if (sentBeams.has(`${cell_key};${direction}`)) {
-    return
-  }
-
-  sentBeams.add(`${cell_key};${direction}`)
-
-  energized_cells.add(cell_key)
-  if (!contraption.has(cell_key)) {
-    const next_x = getNextX(x, direction)
-    const next_y = getNextY(y, direction)
-
-    return sendBeam(next_x, next_y, direction)
-  }
-
-  const cell = contraption.get(cell_key)
-  assert(cell)
-
-  const transformation = getTransformation(cell)
-  const next_directions = transformation[direction]
-  next_directions.forEach(next_direction => {
-    const { next_x, next_y } = getNextCoords(x, y, next_direction)
-    sendBeam(next_x, next_y, next_direction)
-  })
+  return energized_cells.size
 }
 
-sendBeam(0, 0, Direction.Right)
-printCells()
-console.log(energized_cells.size)
+// const count_part_1 = countEnergizedCells(0, 0, Direction.Right)
+// console.log(count)
+
+const all_energized_counts = []
+for (let x = 0 ; x < width ; x++) {
+  const count_top = countEnergizedCells(x, 0, Direction.Down)
+  const count_bottom = countEnergizedCells(x, height - 1, Direction.Up)
+  all_energized_counts.push(count_top)
+  all_energized_counts.push(count_bottom)
+}
+
+for (let y = 0 ; y < height ; y++) {
+  const count_left = countEnergizedCells(0, y, Direction.Down)
+  const count_right = countEnergizedCells(width - 1, y, Direction.Up)
+  all_energized_counts.push(count_left)
+  all_energized_counts.push(count_right)
+}
+
+console.log(Math.max(...all_energized_counts))
